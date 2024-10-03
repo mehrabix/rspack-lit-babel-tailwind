@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { PageComponent } from '../utils/page-component';
+import { PageComponent } from '../decorators/page-component';
 import '../components/sample-image';
 
 @PageComponent
