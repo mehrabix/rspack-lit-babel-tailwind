@@ -1,24 +1,32 @@
-const rspack = require('@rspack/core');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const rspack = require("@rspack/core");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
-  entry: './src/app.ts',
+  entry: "./src/app.ts",
+  output: {
+    filename: "[name].[contenthash].js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    clean: true,
+  },
+  mode: "production",
   module: {
     rules: [
       {
         test: /\.(png|jpe?g|gif)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
       },
       {
         test: /\.(tsx?|jsx?)$/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-typescript'],
+            presets: ["@babel/preset-env", "@babel/preset-typescript"],
             plugins: [
-              ["@babel/plugin-proposal-decorators", { "legacy": true }],
-              "@babel/plugin-transform-class-properties"
+              ["@babel/plugin-proposal-decorators", { legacy: true }],
+              "@babel/plugin-transform-class-properties",
+              "@babel/plugin-syntax-dynamic-import",
             ],
           },
         },
@@ -27,41 +35,53 @@ module.exports = {
         test: /\.css$/,
         use: [
           rspack.CssExtractRspackPlugin.loader,
-          'css-loader',
-          'postcss-loader',
+          "css-loader",
+          "postcss-loader",
         ],
       },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: [".ts", ".js"],
   },
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 20000,
+      maxSize: 50000,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+    runtimeChunk: "single",
+    minimize: true,
+    sideEffects: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      inject: 'body',
-      filename: 'index.html',
+      template: "./src/index.html",
+      inject: "body",
+      filename: "index.html",
     }),
-    new rspack.HotModuleReplacementPlugin(),
     new rspack.CssExtractRspackPlugin({
-      filename: 'global.css',
+      filename: "[name].[contenthash].css",
     }),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
-      publicPath: '/',
+      directory: path.join(__dirname, "dist"),
+      publicPath: "/",
     },
     compress: true,
     port: 9000,
     hot: true,
     liveReload: true,
-    watchFiles: ['src/**/*'],
+    watchFiles: ["src/**/*"],
     historyApiFallback: true,
     devMiddleware: {
       writeToDisk: true,

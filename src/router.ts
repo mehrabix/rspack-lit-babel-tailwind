@@ -1,28 +1,26 @@
-import Home from './pages/home';
-import About from './pages/about';
-
 export default class Router {
-  private routes: { [key: string]: any };
+  private routes: { [key: string]: () => Promise<any> };
 
   constructor() {
     this.routes = {
-      '/': Home,
-      '/about': About,
+      '/': () => import('./pages/home'),
+      '/about': () => import('./pages/about'),
     };
   }
 
-  navigate(path: string) {
+  async navigate(path: string) {
     const rootElement = document.getElementById('app');
     if (!rootElement) return;
 
-    const Component = this.routes[path];
-    if (Component) {
+    const routeLoader = this.routes[path];
+    if (routeLoader) {
       rootElement.innerHTML = '';
 
+      const { default: Component } = await routeLoader();
       const componentInstance = new Component();
       
       rootElement.appendChild(componentInstance);
-      
+
       componentInstance.render();
     }
   }
