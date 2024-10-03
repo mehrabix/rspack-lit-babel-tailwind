@@ -17,8 +17,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|svg)$/i,
         type: "asset/resource",
+        generator: {
+          filename: 'assets/images/[hash][ext][query]',
+        },
       },
       {
         test: /\.(tsx?|jsx?)$/,
@@ -41,7 +44,7 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [
           rspack.CssExtractRspackPlugin.loader,
           "css-loader",
@@ -97,6 +100,7 @@ module.exports = {
         collapseWhitespace: true,
         removeRedundantAttributes: true,
       },
+      preload: ['.css', '.js'],
     }),
     new rspack.CssExtractRspackPlugin({
       filename: "[name].[contenthash].css",
@@ -105,6 +109,14 @@ module.exports = {
       filename: "[name].[contenthash].js.gz",
       algorithm: "gzip",
       test: /\.(js|css|html|svg)$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
+    new CompressionPlugin({
+      filename: "[name].[contenthash].js.br",
+      algorithm: "brotliCompress",
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: { level: 11 },
       threshold: 10240,
       minRatio: 0.8,
     }),
