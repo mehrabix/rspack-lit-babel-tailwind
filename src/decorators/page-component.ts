@@ -12,13 +12,11 @@ export function PageComponent<T extends { new (...args: any[]): LitElement }>(ta
   const connectedCallback = target.prototype.connectedCallback;
   target.prototype.connectedCallback = function () {
     connectedCallback && connectedCallback.call(this);
-    console.log(`${target.name} component mounted`);
   };
 
   const disconnectedCallback = target.prototype.disconnectedCallback;
   target.prototype.disconnectedCallback = function () {
     disconnectedCallback && disconnectedCallback.call(this);
-    console.log(`${target.name} component unmounted`);
   };
 
   return target;
