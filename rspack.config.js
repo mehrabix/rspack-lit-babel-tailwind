@@ -57,11 +57,16 @@ module.exports = {
       minSize: 20000,
       maxSize: 50000,
       cacheGroups: {
-        vendor: {
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
           chunks: "all",
-          enforce: true,
+          priority: -10,
         },
       },
     },
@@ -81,7 +86,6 @@ module.exports = {
         removeRedundantAttributes: true,
       },
     }),
-
     new rspack.CssExtractRspackPlugin({
       filename: "[name].[contenthash].css",
     }),
