@@ -61,6 +61,7 @@ module.exports = {
     runtimeChunk: "single",
     minimize: true,
     sideEffects: true,
+    usedExports: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
