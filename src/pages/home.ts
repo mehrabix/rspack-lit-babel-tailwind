@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import '../components/sample-image';
 
 export default class Home extends LitElement {
   createRenderRoot() {
@@ -26,7 +27,7 @@ export default class Home extends LitElement {
         </div>
 
         <div class="text-center">
-          <img src="https://via.placeholder.com/300" alt="Sample Image" class="rounded-lg shadow-md">
+        <reusable-image src="https://via.placeholder.com/300" alt="Sample Image"></reusable-image>
         </div>
       </div>
     `;

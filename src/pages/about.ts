@@ -1,10 +1,9 @@
 import { html, css, LitElement } from 'lit';
+import { PageComponent } from '../utils/page-component';
+import '../components/sample-image';
 
+@PageComponent
 export default class About extends LitElement {
-  createRenderRoot() {
-    return this;
-  }
-
   static styles = css`
     h1 {
       background-color: #16a34a;
@@ -32,7 +31,7 @@ export default class About extends LitElement {
         </div>
 
         <div class="text-center">
-          <img src="https://via.placeholder.com/300" alt="About Us Image" class="rounded-lg shadow-md">
+          <reusable-image src="https://via.placeholder.com/300" alt="Sample Image"></reusable-image>
         </div>
       </div>
     `;
