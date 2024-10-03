@@ -1,6 +1,8 @@
 import { html, LitElement } from 'lit';
 import '../components/sample-image';
+import { PageComponent } from '../decorators/page-component';
 
+@PageComponent('home')
 export default class Home extends LitElement {
   createRenderRoot() {
     return this;
@@ -37,8 +39,4 @@ export default class Home extends LitElement {
     this.count += 1;
     this.requestUpdate();
   }
-}
-
-if (!customElements.get('home-page')) {
-  customElements.define('home-page', Home);
 }

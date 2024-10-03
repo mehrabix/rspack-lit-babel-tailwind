@@ -2,7 +2,7 @@ import { html, css, LitElement } from 'lit';
 import { PageComponent } from '../decorators/page-component';
 import '../components/sample-image';
 
-@PageComponent
+@PageComponent('about')
 export default class About extends LitElement {
   static styles = css`
     h1 {
@@ -36,8 +36,4 @@ export default class About extends LitElement {
       </div>
     `;
   }
-}
-
-if (!customElements.get('about-page')) {
-  customElements.define('about-page', About);
 }
