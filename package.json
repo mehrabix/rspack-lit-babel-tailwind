@@ -1,8 +1,8 @@
 {
   "scripts": {
     "clean": "rimraf dist",
-    "build": "rspack build --mode production",
-    "start": "rspack serve --mode development"
+    "build": "rspack build --mode=production",
+    "start": "rspack serve --mode=development"
   },
   "devDependencies": {
     "@babel/core": "^7.25.7",

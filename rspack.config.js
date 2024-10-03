@@ -1,6 +1,8 @@
 const rspack = require("@rspack/core");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
   entry: "./src/app.ts",
   output: {
@@ -9,7 +11,7 @@ module.exports = {
     publicPath: "/",
     clean: true,
   },
-  mode: "development",
+  mode: isProduction ? 'production' : 'development',
   module: {
     rules: [
       {
