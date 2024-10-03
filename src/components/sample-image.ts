@@ -2,7 +2,7 @@ import { html, LitElement, css } from 'lit';
 import { ReusableComponent } from '../decorators/reusable-component';
 import { property } from 'lit/decorators.js';
 
-@ReusableComponent
+@ReusableComponent({ tag: 'reusable-image' })
 export class SampleImage extends LitElement {
   static styles = css`
     .image-container {
@@ -50,9 +50,4 @@ export class SampleImage extends LitElement {
       </div>
     `;
   }
-}
-
-// Only define the custom element once
-if (!customElements.get('reusable-image')) {
-  customElements.define('reusable-image', SampleImage);
 }
