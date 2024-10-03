@@ -1,7 +1,6 @@
 const rspack = require("@rspack/core");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-
 module.exports = {
   entry: "./src/app.ts",
   output: {
@@ -10,7 +9,7 @@ module.exports = {
     publicPath: "/",
     clean: true,
   },
-  mode: "production",
+  mode: "development",
   module: {
     rules: [
       {
@@ -27,6 +26,12 @@ module.exports = {
               ["@babel/plugin-proposal-decorators", { legacy: true }],
               "@babel/plugin-transform-class-properties",
               "@babel/plugin-syntax-dynamic-import",
+              [
+                "transform-define",
+                {
+                  "process.env.LIT_DEV_MODE": "'false'",
+                },
+              ],
             ],
           },
         },
@@ -68,7 +73,13 @@ module.exports = {
       template: "./src/index.html",
       inject: "body",
       filename: "index.html",
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+      },
     }),
+
     new rspack.CssExtractRspackPlugin({
       filename: "[name].[contenthash].css",
     }),

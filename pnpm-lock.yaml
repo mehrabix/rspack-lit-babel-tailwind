@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      babel-plugin-transform-define:
+        specifier: ^2.1.4
+        version: 2.1.4
       lit:
         specifier: ^3.2.0
         version: 3.2.0
@@ -1088,6 +1091,10 @@ packages:
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
 
+  babel-plugin-transform-define@2.1.4:
+    resolution: {integrity: sha512-NN9xFmyNvr4swPZkRWy+RZZoV0yHhPk/WoxpuIvcVkTyYf0xy/JTQeZVbVGX8hyJ0/NKKuxnt4BZz9No7BziVA==}
+    engines: {node: '>= 8.x.x'}
+
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
@@ -1192,9 +1199,6 @@ packages:
 
   colorette@2.0.19:
     resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
-
-  colorette@2.0.20:
-    resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -1377,8 +1381,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.31:
-    resolution: {integrity: sha512-QcDoBbQeYt0+3CWcK/rEbuHvwpbT/8SV9T3OSgs6cX1FlcUAkgrkqbg9zLnDrMM/rLamzQwal4LYFCiWk861Tg==}
+  electron-to-chromium@1.5.32:
+    resolution: {integrity: sha512-M+7ph0VGBQqqpTT2YrabjNKSQ2fEl9PVx6AK3N558gDH9NO8O6XN9SXXFWRo9u9PbEg/bWq+tjXQr+eXmxubCw==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -2532,6 +2536,9 @@ packages:
   totalist@1.1.0:
     resolution: {integrity: sha512-gduQwd1rOdDMGxFG1gEvhV88Oirdo2p+KjoYFU7k2g+i7n6AFFbDQ5kMPUsW0pNbfQsB/cwXvT1i4Bue0s9g5g==}
     engines: {node: '>=6'}
+
+  traverse@0.6.6:
+    resolution: {integrity: sha512-kdf4JKs8lbARxWdp7RKdNzoJBhGUcIalSYibuGyHJbmk40pOysQ0+QPvlkCOICOivDWU2IJo2rkrxyTK2AH4fw==}
 
   tree-dump@1.0.2:
     resolution: {integrity: sha512-dpev9ABuLWdEubk+cIaI9cHwRNNDjkBBLXTwI4UCUFdQ5xXKqNXoK4FEciw/vxf+NQ7Cb7sGUyeUtORvHIdRXQ==}
@@ -4008,6 +4015,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  babel-plugin-transform-define@2.1.4:
+    dependencies:
+      lodash: 4.17.21
+      traverse: 0.6.6
+
   balanced-match@1.0.2: {}
 
   batch@0.6.1: {}
@@ -4049,7 +4061,7 @@ snapshots:
   browserslist@4.24.0:
     dependencies:
       caniuse-lite: 1.0.30001666
-      electron-to-chromium: 1.5.31
+      electron-to-chromium: 1.5.32
       node-releases: 2.0.18
       update-browserslist-db: 1.1.1(browserslist@4.24.0)
 
@@ -4130,8 +4142,6 @@ snapshots:
   color-name@1.1.4: {}
 
   colorette@2.0.19: {}
-
-  colorette@2.0.20: {}
 
   commander@2.20.3: {}
 
@@ -4296,7 +4306,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.31: {}
+  electron-to-chromium@1.5.32: {}
 
   emoji-regex@8.0.0: {}
 
@@ -5448,6 +5458,8 @@ snapshots:
 
   totalist@1.1.0: {}
 
+  traverse@0.6.6: {}
+
   tree-dump@1.0.2(tslib@2.7.0):
     dependencies:
       tslib: 2.7.0
@@ -5534,7 +5546,7 @@ snapshots:
 
   webpack-dev-middleware@7.4.2(webpack@5.95.0):
     dependencies:
-      colorette: 2.0.20
+      colorette: 2.0.19
       memfs: 4.12.0
       mime-types: 2.1.35
       on-finished: 2.4.1
@@ -5555,7 +5567,7 @@ snapshots:
       ansi-html-community: 0.0.8
       bonjour-service: 1.2.1
       chokidar: 3.6.0
-      colorette: 2.0.20
+      colorette: 2.0.19
       compression: 1.7.4
       connect-history-api-fallback: 2.0.0
       default-gateway: 6.0.3
