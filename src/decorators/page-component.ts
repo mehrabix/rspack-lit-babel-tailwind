@@ -1,6 +1,10 @@
 import { LitElement } from 'lit';
 
-export function PageComponent(elementName: string) {
+interface PageComponentOptions {
+  name: string;
+}
+
+export function PageComponent(options: PageComponentOptions) {
   return function <T extends { new (...args: any[]): LitElement }>(target: T) {
     if (!(target.prototype instanceof LitElement)) {
       Object.setPrototypeOf(target.prototype, LitElement.prototype);
@@ -24,7 +28,7 @@ export function PageComponent(elementName: string) {
       }
     };
 
-    const customElementName = elementName.toLowerCase() + '-page';
+    const customElementName = options.name.toLowerCase();
 
     if (!customElements.get(customElementName)) {
       customElements.define(customElementName, target);

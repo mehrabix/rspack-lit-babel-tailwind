@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import '../components/sample-image';
 import { PageComponent } from '../decorators/page-component';
 
-@PageComponent('home')
+@PageComponent({name:'home-page'})
 export default class Home extends LitElement {
   createRenderRoot() {
     return this;
