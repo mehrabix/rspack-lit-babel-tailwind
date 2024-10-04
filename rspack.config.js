@@ -106,35 +106,38 @@ module.exports = {
     new rspack.CssExtractRspackPlugin({
       filename: "[name].[contenthash].css",
     }),
-    new CompressionPlugin({
-      filename: "[name].[contenthash].js.gz",
-      algorithm: "gzip",
-      test: /\.(js|css|html|svg)$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
-    new CompressionPlugin({
-      filename: "[name].[contenthash].js.br",
-      algorithm: "brotliCompress",
-      test: /\.(js|css|html|svg)$/,
-      compressionOptions: { level: 11 },
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
+    ...(!isProduction ? [] : [
+      new CompressionPlugin({
+        filename: "[name].[contenthash].js.gz",
+        algorithm: "gzip",
+        test: /\.(js|css|html|svg)$/,
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
+      new CompressionPlugin({
+        filename: "[name].[contenthash].js.br",
+        algorithm: "brotliCompress",
+        test: /\.(js|css|html|svg)$/,
+        compressionOptions: { level: 11 },
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
+    ]),
+    new rspack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     static: {
-        directory: path.join(__dirname, "dist"),
-        publicPath: "/",
+      directory: path.join(__dirname, 'dist'),
+      publicPath: '/',
     },
-    compress: true,
+    compress: isProduction,
     port: 9000,
     hot: true,
-    liveReload: true,
-    watchFiles: ["src/**/*"],
+    liveReload: false,
+    watchFiles: ['src/**/*'],
     historyApiFallback: true,
     devMiddleware: {
-        writeToDisk: true,
+      writeToDisk: false,
     },
-},
+  }
 };
