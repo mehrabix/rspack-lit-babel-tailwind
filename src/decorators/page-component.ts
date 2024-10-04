@@ -1,3 +1,4 @@
+import { SignalWatcher } from '@lit-labs/preact-signals';
 import { LitElement } from 'lit';
 
 interface PageComponentOptions {
@@ -10,19 +11,21 @@ export function PageComponent(options: PageComponentOptions) {
       Object.setPrototypeOf(target.prototype, LitElement.prototype);
     }
 
-    target.prototype.createRenderRoot = function () {
+    const OriginalClass = SignalWatcher(target);
+
+    OriginalClass.prototype.createRenderRoot = function () {
       return this;
     };
 
-    const originalConnectedCallback = target.prototype.connectedCallback;
-    target.prototype.connectedCallback = function () {
+    const originalConnectedCallback = OriginalClass.prototype.connectedCallback;
+    OriginalClass.prototype.connectedCallback = function () {
       if (originalConnectedCallback) {
         originalConnectedCallback.call(this);
       }
     };
 
-    const originalDisconnectedCallback = target.prototype.disconnectedCallback;
-    target.prototype.disconnectedCallback = function () {
+    const originalDisconnectedCallback = OriginalClass.prototype.disconnectedCallback;
+    OriginalClass.prototype.disconnectedCallback = function () {
       if (originalDisconnectedCallback) {
         originalDisconnectedCallback.call(this);
       }
@@ -31,9 +34,9 @@ export function PageComponent(options: PageComponentOptions) {
     const customElementName = options.name.toLowerCase();
 
     if (!customElements.get(customElementName)) {
-      customElements.define(customElementName, target);
+      customElements.define(customElementName, OriginalClass);
     }
 
-    return target;
+    return OriginalClass;
   };
 }

@@ -13,6 +13,7 @@ module.exports = {
     publicPath: "/",
     clean: true,
   },
+  devtool: isProduction ? false : 'source-map',
   mode: isProduction ? 'production' : 'development',
   module: {
     rules: [
@@ -81,7 +82,7 @@ module.exports = {
       new TerserPlugin({
         terserOptions: {
           compress: {
-            drop_console: true,
+            drop_console: isProduction,
           },
         },
         extractComments: false,
@@ -123,8 +124,8 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
-      publicPath: "/",
+        directory: path.join(__dirname, "dist"),
+        publicPath: "/",
     },
     compress: true,
     port: 9000,
@@ -133,7 +134,7 @@ module.exports = {
     watchFiles: ["src/**/*"],
     historyApiFallback: true,
     devMiddleware: {
-      writeToDisk: true,
+        writeToDisk: true,
     },
-  },
+},
 };
