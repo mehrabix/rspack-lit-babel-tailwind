@@ -3,7 +3,7 @@ import "../components/sample-image";
 import { PageComponent } from "../decorators/page-component";
 import { signal, computed, effect } from "@lit-labs/preact-signals";
 
-@PageComponent({ name: "home-page" })
+@PageComponent({ tag: "home-page" })
 export default class Home extends LitElement {
   count = signal(0);
   name = signal("Jane");

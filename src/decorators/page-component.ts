@@ -2,7 +2,7 @@ import { SignalWatcher } from '@lit-labs/preact-signals';
 import { LitElement } from 'lit';
 
 interface PageComponentOptions {
-  name: string;
+  tag: string;
 }
 
 export function PageComponent(options: PageComponentOptions) {
@@ -31,7 +31,7 @@ export function PageComponent(options: PageComponentOptions) {
       }
     };
 
-    const customElementName = options.name.toLowerCase();
+    const customElementName = options.tag.toLowerCase();
 
     if (!customElements.get(customElementName)) {
       customElements.define(customElementName, OriginalClass);
